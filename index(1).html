@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090d" />
+  <meta name="description" content="MiniDrama — Short Drama • Big Entertainment. Google Sites & Cloud Run Live Streaming Web App." />
+  <title>MiniDrama — Short Drama • Big Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="announcementBar" class="announcement-bar hidden"></div>
+  <div id="maintenanceBar" class="maintenance-bar hidden"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home">
+      <img src="assets/minidrama-logo.jpg" alt="MiniDrama Logo" class="brand-logo" />
+      <span class="brand-text">Mini<span>Drama</span></span>
+    </a>
+
+    <label class="search" aria-label="নাটক খুঁজুন">
+      <span class="search-icon">⌕</span>
+      <input id="searchInput" type="search" placeholder="নাটক বা ক্যাটাগরি খুঁজুন..." />
+    </label>
+
+    <nav class="nav-links">
+      <a href="#home">হোম</a>
+      <a href="#library">ড্রামা লাইব্রেরি</a>
+      <button id="openAdminBtn" class="nav-btn hidden" type="button">⚙ Admin</button>
+      <button id="authBtn" class="auth-pill" type="button">
+        <span class="dot" id="authDot"></span>
+        <span id="authLabel">Google Login</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-backdrop" style="background-image:url('assets/minidrama-bg.jpg')"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow-row">
+            <span class="eyebrow">👑 MINIDRAMA ORIGINALS</span>
+            <span id="syncBadge" class="sync-badge">CLOUD READY</span>
+          </div>
+          <h1 id="heroHeadline">প্রতিদিন নতুন গল্প।<br /><em>নতুন অনুভূতি।</em></h1>
+          <p id="heroSubtitle">আপনার পছন্দের শর্ট ড্রামা, এপিসোড ও প্রিমিয়াম কনটেন্ট—একই সাথে Android অ্যাপ ও Google Sites-এ।</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#library">▶ এখনই দেখুন</a>
+            <button id="heroLoginBtn" class="ghost-btn" type="button">🔐 Firebase Sync / Admin</button>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="poster-stack">
+            <div class="poster poster-a"><span>শেষ বিকেলের<br />গল্প</span></div>
+            <div class="poster poster-b"><span>ভালোবাসার<br />শেষ চিঠি</span></div>
+            <div class="poster poster-c"><span>ক্ষমতার<br />খেলা</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">DISCOVER</p>
+          <h2>ক্যাটাগরি</h2>
+        </div>
+        <span class="muted" id="modeHint">Demo Catalog + Live Firebase Sync</span>
+      </div>
+      <div id="categoryChips" class="chips"></div>
+    </section>
+
+    <section class="section" id="library">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">DRAMA LIBRARY</p>
+          <h2>জনপ্রিয় শর্ট ড্রামা</h2>
+        </div>
+        <span class="muted" id="resultCount"></span>
+      </div>
+      <div id="dramaGrid" class="drama-grid"></div>
+    </section>
+
+    <section id="noticesSection" class="section hidden">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">PORTAL UPDATES</p>
+          <h2>নোটিশ ও কুইক লিংক</h2>
+        </div>
+      </div>
+      <div id="noticesGrid" class="notices-grid"></div>
+      <div id="linksGrid" class="links-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="assets/minidrama-logo.jpg" alt="MiniDrama" class="footer-logo" />
+      <div>
+        <strong id="footerTitle">MiniDrama</strong>
+        <p class="muted">Short Drama • Big Entertainment</p>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span id="contactInfo" class="muted"></span>
+      <div class="footer-actions">
+        <button id="openFullTabBtn" class="link-btn" type="button">↗ নতুন ট্যাবে খুলুন</button>
+        <button id="footerAdminBtn" class="link-btn" type="button">Admin Panel</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drama Detail / Episode List / Video Player Modal -->
+  <div id="dramaModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="close-btn" id="closeDramaModal" aria-label="বন্ধ করুন">✕</button>
+      <div id="dramaModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Firebase Login & Admin Console Modal -->
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+    <div class="modal-card modal-wide">
+      <button class="close-btn" id="closeAdminModal" aria-label="বন্ধ করুন">✕</button>
+      <div id="adminModalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
