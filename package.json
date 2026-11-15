@@ -1,0 +1,12 @@
+{
+  "name": "minidrama-web",
+  "version": "1.0.0",
+  "description": "MiniDrama Responsive Web App for Cloud Run and Google Sites Embed with Firebase Auth & Firestore",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
